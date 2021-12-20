@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jennie.Cli", "Jennie.Cli\Jennie.Cli.csproj", "{B8FB0204-FE91-4B38-A552-AC2CFFCF216C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jennie.Errors", "Jennie.Errors\Jennie.Errors.csproj", "{4DE69F55-CBC4-4036-B55B-48034976DAFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B8FB0204-FE91-4B38-A552-AC2CFFCF216C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8FB0204-FE91-4B38-A552-AC2CFFCF216C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8FB0204-FE91-4B38-A552-AC2CFFCF216C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE69F55-CBC4-4036-B55B-48034976DAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE69F55-CBC4-4036-B55B-48034976DAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE69F55-CBC4-4036-B55B-48034976DAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE69F55-CBC4-4036-B55B-48034976DAFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
