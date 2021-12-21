@@ -1,5 +1,8 @@
-﻿using Jennie.Errors;
+﻿using Jennie.Core;
+using Jennie.Errors;
 using MoreLinq;
+
+const string configFileName = "jennie.config";
 
 if (!args.Any())
 {
@@ -10,14 +13,49 @@ if (!args.Any())
 
 return args[0] switch
 {
+    "new" => await ProcessNewProjectCommand(args[1..]),
     "build" => await ProcessBuildCommand(),
     _ => await ProcessInvalidCommand(args[0]),
 };
 
+static async Task<int> ProcessNewProjectCommand(string[] args)
+{
+    if (!args.Any())
+    {
+        var error = Error.InvalidCommandArguments("new", string.Join(' ', args));
+        Console.WriteLine(error);
+        return error.Code;
+    }
+
+    var projectName = args.First().Trim();
+
+    if (string.IsNullOrWhiteSpace(projectName))
+    {
+        var error = Error.InvalidConfigValueSupplied("name");
+        Console.WriteLine(error);
+        return error.Code;
+    }
+
+    var project = new ProjectConfig(projectName);
+
+    if (File.Exists(configFileName))
+    {
+        var error = Error.ProjectAlreadyInitialized();
+        Console.WriteLine(error);
+        return error.Code;
+    }
+
+    await using StreamWriter sw = File.CreateText(configFileName);
+
+    sw.WriteLine("name: {0}", project.ProjectName);
+
+    Console.WriteLine($"New project '{project.ProjectName}' initialized!");
+
+    return 0;
+}
+
 static async Task<int> ProcessBuildCommand()
 {
-    const string configFileName = "jennie.config";
-
     if (!File.Exists(configFileName))
     {
         var error = Error.ConfigFileNotFound();
@@ -67,6 +105,5 @@ static Task<int> ProcessInvalidCommand(string command)
 {
     var error = Error.InvalidCommand(command);
     Console.WriteLine(error);
-
     return Task.FromResult(error.Code);
 }
