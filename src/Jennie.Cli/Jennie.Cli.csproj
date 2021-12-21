@@ -9,6 +9,8 @@
         <ToolCommandName>jennie</ToolCommandName>
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <Version>0.2.0</Version>
+        <LangVersion>preview</LangVersion>
+        <EnablePreviewFeatures>true</EnablePreviewFeatures>
     </PropertyGroup>
     
     <ItemGroup>
