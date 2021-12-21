@@ -31,24 +31,27 @@ var configLines = await File.ReadAllLinesAsync(configFileName);
 var errors = new List<Error>();
 var configValues = new Dictionary<string, string>();
 
-foreach (var configLine in configLines)
+for (var i = 0; i < configLines.Length; i++)
 {
-    var parts = configLine.Split(": ");
+    var lineNumber = i + 1;
+    var lineContents = configLines[i];
+    var partsParts = lineContents.Split(": ");
 
-    if (parts.Length != 2)
+    if (partsParts.Length != 2)
     {
-        errors.Add(Error.InvalidConfigLine(configLine));
+        errors.Add(Error.InvalidConfigLine(lineNumber, lineContents));
+        continue;
     }
-    else
-    {
-        var key = parts[0].Trim();
-        var value = parts[1].Trim(' ', '"');
-        configValues.Add(key, value);
-    }
+
+    var key = partsParts[0].Trim();
+    var value = partsParts[1].Trim(' ', '"');
+    configValues.Add(key, value);
 }
 
 if (errors.Any())
 {
+    Console.WriteLine($"{configFileName} is invalid!");
+    Console.WriteLine();
     errors.ForEach(Console.WriteLine);
 
     return errors.First().Code;
