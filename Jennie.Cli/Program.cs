@@ -28,9 +28,6 @@ if (!File.Exists(configFileName))
 
 var configLines = await File.ReadAllLinesAsync(configFileName);
 
-Console.WriteLine($"{configFileName} contains the following:");
-Console.WriteLine();
-
 var errors = new List<Error>();
 var configValues = new Dictionary<string, string>();
 
@@ -57,6 +54,8 @@ if (errors.Any())
     return errors.First().Code;
 }
 
+Console.WriteLine($"{configFileName} contains the following:");
+Console.WriteLine();
 configValues.ForEach(kvp => Console.WriteLine($"{kvp.Key}: {kvp.Value}"));
 
 return 0;
